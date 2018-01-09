@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                mvn clean compile
+               echo 'mvn clean compile'
             }
         }
         stage('Package') {
             steps {
-                mvn package .
+                echo 'mvn package'
             }
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                echo 'archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true'
             }
         }
     }
