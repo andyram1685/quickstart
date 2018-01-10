@@ -11,7 +11,7 @@ def source_repo_checkout(){
 def build_war() {
     stage 'Build war'
     //def mvnHome = tool 'M3' 
-    withMaven(){
+    withMaven(maven: 'M3'){
     // Maven installation declared in the Jenkins "Global Tool Configuration"
         echo 'mvn clean compile'
         dir ('kitchensink') {
