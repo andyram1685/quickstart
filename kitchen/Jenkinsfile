@@ -20,6 +20,7 @@ def build_package() {
     def mvnHome = tool 'M3' // Maven installation declared in the Jenkins "Global Tool Configuration"
     dir ('kitchensink') {
         sh "${mvnHome}/bin/mvn package
+    }
 }
 
 def build_archive(){
