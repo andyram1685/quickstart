@@ -5,34 +5,25 @@ def source_repo_checkout(){
 }
 
 def build_war() {
-    stage 'Build war'
-    def mvnHome = tool 'M3' 
-       dir ('kitchensink') {
-           sh "ls -l"
-           sh "${mvnHome}/bin/mvn clean compile"
-        }
-   
-    /*Use Maven pipeline Plugin
-     Maven installation name declared in the Jenkins "Global Tool Configuration"
-     withMaven(maven: 'M3'){
-        dir ('kitchensink') {
-            sh "ls -l"
-            echo 'Running -> mvn clean compile'
-            sh "mvn clean compile"
-        }
-     
-    }*/
+    stage ('Build war') {
+        def mvnHome = tool 'M3' 
+            dir ('kitchensink') {
+                sh "ls -l"
+                sh "${mvnHome}/bin/mvn clean compile"
+            }
+     }       
 }
 
 def build_package() {
-    stage 'Package'
-    echo 'mvn package' 
-    def mvnHome = tool 'M3' 
-    dir ('kitchensink') {
-         sh "ls -l"
-         sh "${mvnHome}/bin/mvn clean package"
+    stage ('Package') {
+        echo 'mvn package' 
+        def mvnHome = tool 'M3' 
+        dir ('kitchensink') {
+            sh "ls -l"
+            sh "${mvnHome}/bin/mvn clean package"
         }
    }
+}
 
 def build_archive(){
     stage 'Archive'
