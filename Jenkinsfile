@@ -6,7 +6,7 @@ def source_repo_checkout(){
 
 def build_war() {
     stage 'Build war'
-    def mvnHome = tool 'maven-3'
+    // def mvnHome = tool 'M3'
     echo 'mvn clean compile'
     dir ('kitchensink') {
         ls -l
@@ -22,6 +22,7 @@ def build_package() {
 def build_archive(){
     stage 'Archive'
     echo 'Archive'
+    //archiveArtifacts artifacts: 'target/*.war'
 }
     
 node {
