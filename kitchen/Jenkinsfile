@@ -1,5 +1,8 @@
-// Dependencies
-// 1. Pipeline Maven Integration Plugin
+/* Plugins Needed
+1.Maven Installation
+2.Pipeline Maven Integration Plugin
+3.Maven Name set in Global Configuration Tool
+*/
 
 
 def source_repo_checkout(){
@@ -10,13 +13,14 @@ def source_repo_checkout(){
 
 def build_war() {
     stage 'Build war'
-    //def mvnHome = tool 'M3' 
+    //def mvnHome = tool 'M3'  
+    //Use Maven pipeline Plugin
+    // Maven installation name declared in the Jenkins "Global Tool Configuration"
     withMaven(maven: 'M3'){
-    // Maven installation declared in the Jenkins "Global Tool Configuration"
         echo 'mvn clean compile'
         dir ('kitchensink') {
             sh "ls -l"
-            sh "${mvnHome}/bin/mvn clean compile"
+            sh "mvn clean compile"
         }
     }
 }
@@ -24,10 +28,14 @@ def build_war() {
 def build_package() {
     stage 'Package'
     echo 'mvn package' 
-    def mvnHome = tool 'M3' 
-    // Maven installation declared in the Jenkins "Global Tool Configuration"
-    dir ('kitchensink') {
-        sh "${mvnHome}/bin/mvn package"
+    //Use Maven pipeline Plugin
+    // Maven installation name declared in the Jenkins "Global Tool Configuration"
+    withMaven(maven: 'M3'){
+        echo 'mvn clean compile'
+        dir ('kitchensink') {
+            sh "ls -l"
+            sh "mvn package"
+        }
     }
 }
 
