@@ -6,7 +6,7 @@ def source_repo_checkout(){
 
 def build_war() {
     stage 'Build war'
-    def mvnHome = tool 'M3'
+    // def mvnHome = tool 'M3'
     echo 'mvn clean compile'
     dir ('kitchensink') {
         sh "ls -l"
