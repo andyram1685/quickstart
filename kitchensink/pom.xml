@@ -50,12 +50,13 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Needed for running tests (you may also use TestNG) -->
+        <!-- Needed for running tests (you may also use TestNG)
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
 
         <!-- Now we declare any tools needed -->
 
@@ -100,12 +101,13 @@
 
         <!-- Optional, but highly recommended -->
         <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA)
-            JPA from JUnit/TestNG -->
+            JPA from JUnit/TestNG 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
