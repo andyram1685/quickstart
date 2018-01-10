@@ -1,5 +1,5 @@
 /* Plugins and Packages needed on your Jenkins Server
-1. Maven Installation
+1. Maven Integration plugin
 2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
 3. Maven Name set in Global Configuration Tool
 4. JDK 8 or Higher
@@ -46,7 +46,7 @@ def build_archive(){
     echo 'Archiving Package'
     dir ('kitchensink') {
         sh "ls -l"
-        archiveArtifacts artifacts: 'target/*.war'
+        archiveArtifacts artifacts: 'target/kitchensink-sources.jar'
     }
         
 }
@@ -54,7 +54,7 @@ def build_archive(){
 node {
     
     currentBuild.result = "OK"
-    try {
+    //try {
         // Stage 1 : Checkout Source control
         source_repo_checkout()
         
@@ -69,9 +69,9 @@ node {
         
     }
     
-    catch (err) {
+/*    catch (err) {
     
-        currentBuild.result = "FAILED"
+        #currentBuild.result = "FAILED"
        
         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
              from: 'anandaraman85@gmail.com',
@@ -82,4 +82,4 @@ node {
         
         throw err
     }
-}
+}*/
