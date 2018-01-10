@@ -48,12 +48,12 @@ node {
     }
     catch (err) {
         currentBuild.result = "FAILED"
-        mail body: "Project build FAILED is here: ${env.BUILD_URL}",
+       /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
              from: 'anandaraman85@gmail.com',
              replyTo: 'anandaraman85@gmail.com',
              subject: 'Project build failed',
              to: 'anandaraman85@gmail.com'
-        
+        */
         throw err
     }
 }
