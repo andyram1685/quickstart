@@ -8,48 +8,50 @@
 */
 
 
-def source_repo_checkout(){
-    stage 'Checkout'
-    echo 'git checkout'
-    checkout scm    
+def source_repo_checkout() {
+    stage ('Checkout') {
+        echo 'git checkout'
+        checkout scm    
+    }    
 }
 
 def build_war() {
-    stage 'Build war'
+    stage ('Build war') {
     //def mvnHome = tool 'M3'  
     //Use Maven pipeline Plugin
     // Maven installation name declared in the Jenkins "Global Tool Configuration"
-    withMaven(maven: 'M3'){
-        dir ('kitchensink') {
-            sh "ls -l"
-            echo 'Running -> mvn clean compile'
-            sh "mvn clean compile"
+        withMaven(maven: 'M3') {
+            dir ('kitchensink') {
+                sh "ls -l"
+                echo 'Running -> mvn clean compile'
+                sh "mvn clean compile"
+            }
         }
-    }
+    }    
 }
 
 def build_package() {
-    stage 'Package'
-    echo 'mvn package' 
+    stage ('Package') { 
     //Use Maven pipeline Plugin
     // Maven installation name declared in the Jenkins "Global Tool Configuration"
-    withMaven(maven: 'M3'){
-        dir ('kitchensink') {
-            sh "ls -l"
-            echo 'Running -> mvn package'
-            sh "mvn package"
+        withMaven(maven: 'M3'){
+            dir ('kitchensink') {
+                sh "ls -l"
+                echo 'Running -> mvn package'
+                sh "mvn package"
+            }
         }
-    }
+    }    
 }
 
-def build_archive(){
-    stage 'Archive'
-    echo 'Archiving Package'
-    dir ('kitchensink') {
-        sh "ls -l"
-        archiveArtifacts artifacts: 'target/kitchensink-sources.jar'
-    }
-        
+def build_archive() {
+    stage ('Archive') {
+        echo 'Archiving Package'
+        dir ('kitchensink') {
+            sh "ls -l"
+            archiveArtifacts artifacts: 'target/kitchensink-sources.jar'
+        }
+    }    
 }
     
 node {
@@ -72,15 +74,15 @@ node {
     
    catch (err) {
     
-        #currentBuild.result = "FAILED"
+        currentBuild.result = "FAILED"
        
-         mail body: "Project build FAILED is here: ${env.BUILD_URL}",
+         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
              from: 'anandaraman85@gmail.com',
              replyTo: 'anandaraman85@gmail.com',
              subject: 'Project build failed',
              to: 'anandaraman85@gmail.com'
         
         
-        throw err
+        throw err */
     }
 }
