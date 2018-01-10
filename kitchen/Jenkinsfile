@@ -1,7 +1,8 @@
-/* Plugins Needed
-1.Maven Installation
-2.Pipeline Maven Integration Plugin
-3.Maven Name set in Global Configuration Tool
+/* Plugins and Packages needed on your Jenkins Server
+1. Maven Installation
+2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
+3. Maven Name set in Global Configuration Tool
+4. JDK 8 or Higher
 */
 
 
@@ -17,9 +18,9 @@ def build_war() {
     //Use Maven pipeline Plugin
     // Maven installation name declared in the Jenkins "Global Tool Configuration"
     withMaven(maven: 'M3'){
-        echo 'mvn clean compile'
         dir ('kitchensink') {
             sh "ls -l"
+            echo 'Running -> mvn clean compile'
             sh "mvn clean compile"
         }
     }
@@ -31,9 +32,9 @@ def build_package() {
     //Use Maven pipeline Plugin
     // Maven installation name declared in the Jenkins "Global Tool Configuration"
     withMaven(maven: 'M3'){
-        echo 'mvn clean compile'
         dir ('kitchensink') {
             sh "ls -l"
+            echo 'Running -> mvn package'
             sh "mvn package"
         }
     }
@@ -41,27 +42,43 @@ def build_package() {
 
 def build_archive(){
     stage 'Archive'
-    echo 'Archiving'
-    archiveArtifacts artifacts: 'target/*.war'
+    echo 'Archiving Package'
+    dir ('kitchensink') {
+        sh "ls -l"
+        archiveArtifacts artifacts: 'target/*.war'
+    }
+        
 }
     
 node {
     
     currentBuild.result = "OK"
     try {
+        // Stage 1 : Checkout Source control
         source_repo_checkout()
+        
+        // Stage 2 : Build  War
         build_war()
+        
+        // Stage 3 : Build Pacakge
         build_package()
+        
+        //Stage 4: Archive
         build_archive()
+        
     }
+    
     catch (err) {
+    
         currentBuild.result = "FAILED"
-       /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
+       
+        /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
              from: 'anandaraman85@gmail.com',
              replyTo: 'anandaraman85@gmail.com',
              subject: 'Project build failed',
              to: 'anandaraman85@gmail.com'
         */
+        
         throw err
     }
 }
