@@ -2,6 +2,7 @@
 1. Maven Integration plugin
 2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
 3. Maven Name set in Global Configuration Tool
+4. Static Analysis Collector Plug-in 
 4. JDK 8 or Higher
 5. Script path /kitchensink/Jenkinsfile
 */
@@ -54,7 +55,7 @@ def build_archive(){
 node {
     
     currentBuild.result = "OK"
-    //try {
+    try {
         // Stage 1 : Checkout Source control
         source_repo_checkout()
         
@@ -69,7 +70,7 @@ node {
         
     }
     
-/*    catch (err) {
+   catch (err) {
     
         #currentBuild.result = "FAILED"
        
@@ -82,4 +83,4 @@ node {
         
         throw err
     }
-}*/
+}
