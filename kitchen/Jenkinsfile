@@ -3,6 +3,7 @@
 2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
 3. Maven Name set in Global Configuration Tool
 4. JDK 8 or Higher
+5. Script path /kitchen/Jenkinsfile
 */
 
 
