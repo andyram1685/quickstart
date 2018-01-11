@@ -9,7 +9,7 @@
 
 node {
     checkout scm 
-    getRepoName = load "kitchensink/getRepoName.groovy
+    getRepoName = load "kitchensink/getRepoName.groovy"
     list_repo_name()
 }
     
