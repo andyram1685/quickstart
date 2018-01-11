@@ -7,7 +7,6 @@
 5. Script path /kitchensink/Jenkinsfile
 */
 
-
 def source_repo_checkout() {
     stage ('Checkout') {
       echo 'git checkout'
@@ -24,8 +23,7 @@ def list_repo_name() {
         reponame = getRepoName.getRepoName('repo_url')
         reponame     
         getRepoName.getRepoName('repo_url')
-    }    
-               
+    }                  
 
 def build_war() {
     stage ('Build war') {
@@ -72,8 +70,7 @@ node {
     try {
             
         //Stage 1 : Checkout Source control
-        source_repo_checkout()
-        
+        source_repo_checkout()       
         
         // Stage 2 : Build  War
         build_war()
