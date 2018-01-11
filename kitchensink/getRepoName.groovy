@@ -2,7 +2,7 @@
 
 def getRepoName(String giturl) {
     println "${giturl}"
-    giturl.tokenize('/')[3].split("\\.")[0]
+    giturl.tokenize('/')[3]
     }
    
   
