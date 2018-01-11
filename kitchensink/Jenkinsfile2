@@ -6,51 +6,7 @@
 4. JDK 8 or Higher
 5. Script path /kitchensink/Jenkinsfile
 */
-//https://plugins.jenkins.io/permissive-script-security
 
-/* node {
-    checkout scm 
-    def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
-    getRepoName = load "kitchensink/getRepoName.groovy"
-    reponame = getRepoName.getRepoName(repo_url)
-    print "${reponame}"     
-} */
-    
-
-node {
-    
-    currentBuild.result = "OK"
-    try {
-            
-        //Stage 1 : Checkout Source control
-        source_repo_checkout()
-        
-        
-        // Stage 2 : Build  War
-        build_war()
-        
-        // Stage 3 : Build Pacakge
-        build_package()
-        
-        //Stage 4: Archive
-        build_archive()
-        
-    }
-    
-   catch (err) {
-    
-        currentBuild.result = "FAILED"
-       
-         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
-             from: 'anandaraman85@gmail.com',
-             replyTo: 'anandaraman85@gmail.com',
-             subject: 'Project build failed',
-             to: 'anandaraman85@gmail.com'
-        
-        
-        throw err */
-    }
-}
 
 def source_repo_checkout() {
     stage ('Checkout') {
@@ -59,7 +15,7 @@ def source_repo_checkout() {
       def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
       getRepoName = load "kitchensink/getRepoName.groovy"
       reponame = getRepoName.getRepoName(repo_url)
-      print "${reponame}"  
+      print "The repo name is -> ${reponame}"  
     }
 }
     
@@ -110,4 +66,37 @@ def build_archive() {
     }    
 }
     
-
+node {
+    
+    currentBuild.result = "OK"
+    try {
+            
+        //Stage 1 : Checkout Source control
+        source_repo_checkout()
+        
+        
+        // Stage 2 : Build  War
+        build_war()
+        
+        // Stage 3 : Build Pacakge
+        build_package()
+        
+        //Stage 4: Archive
+        build_archive()
+        
+    }
+    
+   catch (err) {
+    
+        currentBuild.result = "FAILED"
+       
+         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
+             from: 'anandaraman85@gmail.com',
+             replyTo: 'anandaraman85@gmail.com',
+             subject: 'Project build failed',
+             to: 'anandaraman85@gmail.com'
+        
+        
+        throw err */
+    }
+}
