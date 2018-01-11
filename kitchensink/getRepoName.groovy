@@ -4,6 +4,5 @@ def getRepoName(String giturl) {
     println "${giturl}"
     giturl.tokenize('/')[3]
     }
-return this
    
   
