@@ -12,9 +12,9 @@ node {
     checkout scm 
     def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
     getRepoName = load "kitchensink/getRepoName.groovy"
-    reponame = getRepoName.getRepoName('repo_url')
+    reponame = getRepoName.getRepoName(repo_url)
     reponame     
-    getRepoName.getRepoName('repo_url')
+    getRepoName.getRepoName(repo_url)
     //list_repo_name()
     
 }
