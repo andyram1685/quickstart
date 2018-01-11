@@ -12,13 +12,16 @@ def source_repo_checkout() {
     stage ('Checkout') {
         echo 'git checkout'
         checkout scm  
-        //getRepoName = load "kitchensink/getRepoName.groovy"
+    }
+}
+    
+def list_repo_name() {
         repo_url = scm.getUserRemoteConfigs()[0].getUrl()
         reponame = getRepoName.getRepoName('repo_url')
         reponame     
         getRepoName.getRepoName('repo_url')
     }    
-}
+               
 
 def build_war() {
     stage ('Build war') {
@@ -67,6 +70,7 @@ node {
         // Stage 1 : Checkout Source control
         source_repo_checkout()
         getRepoName = load "kitchensink/getRepoName.groovy"
+        list_repo_name()
         
         // Stage 2 : Build  War
         build_war()
