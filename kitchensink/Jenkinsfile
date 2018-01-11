@@ -11,7 +11,11 @@
 def source_repo_checkout() {
     stage ('Checkout') {
         echo 'git checkout'
-        checkout scm    
+        checkout scm  
+        getRepoName = load "kitchensink/getRepoName.groovy"
+        repo_url = scm.getUserRemoteConfigs()[0].getUrl()
+        reponame = getRepoName.getRepoName('repo_url')
+        reponame        
     }    
 }
 
@@ -58,6 +62,7 @@ node {
     
     currentBuild.result = "OK"
     try {
+            
         // Stage 1 : Checkout Source control
         source_repo_checkout()
         
