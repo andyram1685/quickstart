@@ -7,6 +7,41 @@
 5. Script path /kitchensink/Jenkinsfile
 */
 
+node {
+    
+    currentBuild.result = "OK"
+    try {
+            
+        // Stage 1 : Checkout Source control
+        source_repo_checkout()
+        getRepoName = load "kitchensink/getRepoName.groovy"
+        list_repo_name()
+        
+        // Stage 2 : Build  War
+        build_war()
+        
+        // Stage 3 : Build Pacakge
+        build_package()
+        
+        //Stage 4: Archive
+        build_archive()
+        
+    }
+    
+   catch (err) {
+    
+        currentBuild.result = "FAILED"
+       
+         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
+             from: 'anandaraman85@gmail.com',
+             replyTo: 'anandaraman85@gmail.com',
+             subject: 'Project build failed',
+             to: 'anandaraman85@gmail.com'
+        
+        
+        throw err */
+    }
+}
 
 def source_repo_checkout() {
     stage ('Checkout') {
@@ -62,38 +97,4 @@ def build_archive() {
     }    
 }
     
-node {
-    
-    currentBuild.result = "OK"
-    try {
-            
-        // Stage 1 : Checkout Source control
-        source_repo_checkout()
-        getRepoName = load "kitchensink/getRepoName.groovy"
-        list_repo_name()
-        
-        // Stage 2 : Build  War
-        build_war()
-        
-        // Stage 3 : Build Pacakge
-        build_package()
-        
-        //Stage 4: Archive
-        build_archive()
-        
-    }
-    
-   catch (err) {
-    
-        currentBuild.result = "FAILED"
-       
-         /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
-             from: 'anandaraman85@gmail.com',
-             replyTo: 'anandaraman85@gmail.com',
-             subject: 'Project build failed',
-             to: 'anandaraman85@gmail.com'
-        
-        
-        throw err */
-    }
-}
+
