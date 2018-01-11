@@ -6,6 +6,7 @@
 4. JDK 8 or Higher
 5. Script path /kitchensink/Jenkinsfile
 */
+//https://plugins.jenkins.io/permissive-script-security
 
 node {
     checkout scm 
