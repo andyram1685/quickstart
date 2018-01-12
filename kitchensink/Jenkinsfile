@@ -1,10 +1,17 @@
-/* Plugins and Packages needed on your Jenkins Server
+/* Jenkins Plugins and Packages needed
 1. Maven Integration plugin
 2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
 3. Maven Name set in Global Configuration Tool
 4. Static Analysis Collector Plug-in 
 4. JDK 8 or Higher
 5. Script path /kitchensink/Jenkinsfile
+
+Fix for: "[WARNING] Cannot get the branch information from the git repository: 
+Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref"
+
+In the Jenkins Job, add this option:
+Git Repositories -> Additional Behaviours -> Check out to specific local branch
+
 */
 
 def source_repo_checkout() {
