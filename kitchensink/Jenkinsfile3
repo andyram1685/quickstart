@@ -25,7 +25,7 @@ def source_repo_checkout() {
       // The below nested SCM object block needs In script approval in Jenkins
       checkout([
                  $class: 'GitSCM',
-                 branches: 'patch-1',
+                 branches: scm.branches,
                  extensions: scm.extensions + [[$class: 'CleanCheckout'], [$class: 'LocalBranch', localBranch: 'new']],
                  userRemoteConfigs: scm.userRemoteConfigs
             ]) 
