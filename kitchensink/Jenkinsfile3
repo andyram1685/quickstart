@@ -72,7 +72,7 @@ def build_archive() {
     
 node {
     
-    currentBuild.result = "OK"
+    //currentBuild.result = "OK"
     // try {
             
         //Stage 1 : Checkout Source control
