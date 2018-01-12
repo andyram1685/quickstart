@@ -95,10 +95,10 @@ node {
         currentBuild.result = "FAILED"
        
          /* mail body: "Project build FAILED is here: ${env.BUILD_URL}",
-             from: 'anandaraman85@gmail.com',
-             replyTo: 'anandaraman85@gmail.com',
+             from: 'xxx@domain.com',
+             replyTo: 'xyz@domain.com',
              subject: 'Project build failed',
-             to: 'anandaraman85@gmail.com'
+             to: 'abc@domain.com'
         
         */
         throw err 
