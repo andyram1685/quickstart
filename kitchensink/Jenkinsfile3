@@ -29,10 +29,6 @@ def source_repo_checkout() {
                  extensions: scm.extensions + [[$class: 'CleanCheckout'], [$class: 'LocalBranch', localBranch: 'new']],
                  userRemoteConfigs: scm.userRemoteConfigs
             ]) 
-      def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
-      getRepoName = load "kitchensink/getRepoName.groovy"
-      reponame = getRepoName.getRepoName(repo_url)
-      print "The repo name is -> ${reponame}"  
     }
 }
     
