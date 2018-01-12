@@ -36,10 +36,12 @@ def source_repo_checkout() {
 }
     
 def list_repo_name() {
-        repo_url = scm.getUserRemoteConfigs()[0].getUrl()
-        reponame = getRepoName.getRepoName('repo_url')
-        reponame     
-        getRepoName.getRepoName('repo_url')
+
+        def repo_url = scm.getUserRemoteConfigs()[0].getUrl()
+        getRepoName = load "kitchensink/getRepoName.groovy"
+        reponame = getRepoName.getRepoName(repo_url)
+        print "The repo name is -> ${reponame}"  
+        
     }                  
 
 def build_war() {
@@ -87,7 +89,9 @@ node {
     try {
             
         //Stage 1 : Checkout Source control
-        source_repo_checkout()       
+        source_repo_checkout()  
+        list_repo_name()
+        
         
         // Stage 2 : Build  War
         build_war()
