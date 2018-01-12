@@ -1,17 +1,20 @@
-/* Jenkins Plugins and Packages needed
-1. Maven Integration plugin
-2. Pipeline Maven Integration Plugin : https://plugins.jenkins.io/pipeline-maven
-3. Maven Name set in Global Configuration Tool
+/* Jenkins Plugins, Packages and prerequisites
+
+1. Maven Integration plugin 
+2. Pipeline Maven Integration Plugin ( https://plugins.jenkins.io/pipeline-maven )
+3. Maven Name set in Global Configuration Tool (Like : M3)
 4. Static Analysis Collector Plug-in 
 4. JDK 8 or Higher
-5. Script path /kitchensink/Jenkinsfile
+5. Use Pipeline SCM 
+6. JenkinsFile path /kitchensink/Jenkinsfile
+7. Jenkins In script approval for below methods:
+    method hudson.plugins.git.GitSCM getUserRemoteConfigs
+    method hudson.plugins.git.GitSCM getBranches
+   (Manage Jenkins -> 	In-process Script Approval)
 
-Fix for: "[WARNING] Cannot get the branch information from the git repository: 
-Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref"
-
-In the Jenkins Job, add this option:
-Git Repositories -> Additional Behaviours -> Check out to specific local branch
-
+8. Fix for: "[WARNING] Cannot get the branch information from the git repository:  Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref"
+   In the Jenkins Job, add this option:
+        Git Repositories -> Additional Behaviours -> Check out to specific local branch
 */
 
 def source_repo_checkout() {
