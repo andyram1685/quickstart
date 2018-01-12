@@ -75,7 +75,7 @@ def build_archive() {
         echo 'Archiving Package'
         dir ('kitchensink') {
             sh "ls -l"
-            archiveArtifacts artifacts: 'target/kitchensink-sources.jar'
+            archiveArtifacts artifacts: 'target/*'
         }
     }    
 }
