@@ -10,6 +10,7 @@
     method hudson.plugins.git.GitSCM getUserRemoteConfigs
     method hudson.plugins.git.GitSCM getBranches
     method hudson.plugins.git.GitSCMBackwardCompatibility getExtensions
+    method hudson.plugins.git.UserRemoteConfig getUrl
    (Manage Jenkins -> 	In-process Script Approval)
 8. Fix for: "[WARNING] Cannot get the branch information from the git repository:  Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref"
    In the Jenkins Job, add this option:
