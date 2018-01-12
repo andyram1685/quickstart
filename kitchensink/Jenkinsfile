@@ -10,6 +10,7 @@
 7. Jenkins In script approval for below methods:
     method hudson.plugins.git.GitSCM getUserRemoteConfigs
     method hudson.plugins.git.GitSCM getBranches
+    method hudson.plugins.git.GitSCMBackwardCompatibility getExtensions
    (Manage Jenkins -> 	In-process Script Approval)
 
 8. Fix for: "[WARNING] Cannot get the branch information from the git repository:  Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref"
@@ -20,7 +21,15 @@
 def source_repo_checkout() {
     stage ('Checkout') {
       echo 'git checkout'
-      checkout scm 
+      //  Use 'checkout scm' if you dont have admin rights on Jenkins to do In script approval and do Step 8. 
+      // checkout scm
+      // The below nested SCM object block needs In script approval in Jenkins
+      checkout([
+                 $class: 'GitSCM',
+                 branches: scm.branches,
+                 extensions: scm.extensions + [[$class: 'CleanCheckout'], [$class: 'LocalBranch', localBranch: 'new']],
+                 userRemoteConfigs: scm.userRemoteConfigs
+            ]) 
       def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
       getRepoName = load "kitchensink/getRepoName.groovy"
       reponame = getRepoName.getRepoName(repo_url)
