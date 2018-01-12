@@ -54,7 +54,7 @@ def build_package() {
             dir ('kitchensink') {
                 sh "ls -l"
                 echo 'Running -> mvn package'
-                sh "mvn package"
+                sh "mvn clean package"
             }
         }
     }    
