@@ -36,7 +36,7 @@ def build_war() {
     //def mvnHome = tool 'M3'  
     //Use Maven pipeline Plugin
     // Maven installation name declared in the Jenkins "Global Tool Configuration"
-        withMaven(maven: 'M3') {
+        withMaven(maven: 'M3', options:[openTasksPublisher(disabled: true)]) {
             dir ('kitchensink') {
                 sh "ls -l"
                 echo 'Running -> mvn clean compile'
