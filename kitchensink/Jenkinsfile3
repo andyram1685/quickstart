@@ -10,7 +10,13 @@
 def source_repo_checkout() {
     stage ('Checkout') {
       echo 'git checkout'
-      checkout scm 
+      //checkout scm
+      checkout([
+                 $class: 'GitSCM',
+                 branches: scm.branches,
+                 extensions: scm.extensions + [[$class: 'CleanCheckout'], [$class: 'LocalBranch', localBranch: 'new']],
+                 userRemoteConfigs: scm.userRemoteConfigs
+            ])
       def repo_url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
       getRepoName = load "kitchensink/getRepoName.groovy"
       reponame = getRepoName.getRepoName(repo_url)
@@ -93,7 +99,8 @@ node {
              subject: 'Project build failed',
              to: 'anandaraman85@gmail.com'
         
+        */
+        throw err 
         
-        throw err */
     }
 }
